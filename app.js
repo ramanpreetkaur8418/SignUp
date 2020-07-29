@@ -1,5 +1,5 @@
 //jshint esversion: 6s
-
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
@@ -36,12 +36,13 @@ app.post("/", function(req, res) {
   }
 
   const jsonData = JSON.stringify(data);
-
-  const url = "https://us10.api.mailchimp.com/3.0/lists/f9c087e504"
+  console.log( process.env.LIST_ID);
+  console.log( process.env.API_KEY);
+  const url = "https://us10.api.mailchimp.com/3.0/lists/" + process.env.LIST_ID;
 
   const options = {
     method: "post",
-    auth: "TAC:25051c75b6d8ddcbc8c3bef869fbc410-us10"
+    auth: "TAC:" + process.env.API_KEY
   }
 
   const request = https.request(url, options, function(response){
@@ -68,5 +69,5 @@ app.listen(process.env.PORT || 3000, function(){
 
 
 // API KEY: aa7b8c45eb286468628c8965138647d0-us10
-
+// 5517f10f370d66aee3d0f84156bb349e60861f0a
 // LIST ID: f9c087e504
